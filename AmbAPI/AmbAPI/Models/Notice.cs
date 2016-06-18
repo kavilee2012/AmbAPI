@@ -5,7 +5,7 @@ using System.Web;
 
 namespace AmbAPI.Models
 {
-    public class News
+    public class Notice
     {
         public int ID { get; set; }
 
@@ -13,12 +13,12 @@ namespace AmbAPI.Models
 
         public string Content { get; set; }
 
-        public DateTime AddTime { get; set; }
+        public DateTime PublishDate { get; set; }
 
-        public string Author { get; set; }
+        public string Publisher { get; set; }
 
-        public string Url { get; set; }
+        public int ViewCount { get; set; }
 
-        public bool IsTop { get; set; }
+        public int aa { get; set; }
     }
 }

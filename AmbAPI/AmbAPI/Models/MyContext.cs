@@ -18,6 +18,10 @@ namespace AmbAPI.Models
         public DbSet<ReportGroup> ReportGroup { get; set; }
         public DbSet<SBU> SBU { get; set; }
         public DbSet<About> About { get; set; }
+        public DbSet<Notice> Notice { get; set; }
+        public DbSet<Photo> Photo { get; set; }
+        public DbSet<AccountReport> AccountReport { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
