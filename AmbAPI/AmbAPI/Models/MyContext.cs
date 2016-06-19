@@ -10,7 +10,10 @@ namespace AmbAPI.Models
 {
     public class MyContext : DbContext
     {
-        public MyContext() : base("AmbConn") { }
+        public MyContext() : base("AmbConn") 
+        {
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<MyContext>());
+        }
 
         public DbSet<User> User { get; set; }
         public DbSet<News> News { get; set; }

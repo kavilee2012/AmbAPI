@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using AmbAPI.Models;
+using AmbAPI.Service;
 using Newtonsoft.Json;
 
 namespace AmbAPI.Controllers
@@ -29,34 +30,47 @@ namespace AmbAPI.Controllers
         [HttpGet]
         public string Register(string code, string pwd, string mobile)
         {
-            MyStatus status = new MyStatus(1, "成功");
-            if (string.IsNullOrEmpty(code) || string.IsNullOrEmpty(pwd) || string.IsNullOrEmpty(mobile))
-            {
-                status.Code = 0;
-                status.Msg = "字段为空";
-                return status.ToString();
-            }
-
-            User user = new Models.User()
-            {
-                UserCode = code,
-                Mobile = mobile,
-                Password = pwd,
-                Birthday=DateTime.Now
-            };
-
+            MyResponse response = new MyResponse();
             try
             {
+                if (string.IsNullOrEmpty(code) || string.IsNullOrEmpty(pwd) || string.IsNullOrEmpty(mobile))
+                {
+                    throw new Exception(StatusCode.ArgsNull.ToString());
+                }
+
+                User user = new User()
+                {
+                    UserCode = code,
+                    Mobile = mobile,
+                    Password = pwd
+                };
+
+
+                User u = db.User.FirstOrDefault<User>(X => X.UserCode == user.UserCode);
+                if (u != null)
+                {
+                    throw new Exception(StatusCode.UserHadExist.ToString());
+                }
+
                 db.User.Add(user);
                 db.SaveChanges();
             }
             catch (Exception ex)
             {
-                status.Code = 0;
-                status.Msg = "保存异常";
-                status.Remark = ex.Message;
+                if (ex.Message == StatusCode.ArgsNull.ToString())
+                {
+                    response.Code = StatusCode.ArgsNull;
+                }
+                else if (ex.Message == StatusCode.UserHadExist.ToString())
+                {
+                    response.Code = StatusCode.UserHadExist;
+                }
+                else
+                {
+                    response.Code = StatusCode.Error;
+                }
             }
-            return status.ToString();
+            return response.ToString();
         }
 
         /// <summary>
@@ -68,20 +82,38 @@ namespace AmbAPI.Controllers
         [HttpGet]
         public string Login(string code, string pwd)
         {
-            MyStatus status = new MyStatus(0, "登录失败");
-            if (string.IsNullOrEmpty(code) || string.IsNullOrEmpty(pwd))
+            MyResponse response = new MyResponse();
+            try
             {
-                status.Msg = "字段为空";
-                return status.ToString();
+                if (string.IsNullOrEmpty(code) || string.IsNullOrEmpty(pwd))
+                {
+                    throw new Exception(StatusCode.ArgsNull.ToString());
+                }
+                User user = db.User.FirstOrDefault<User>(X => X.UserCode == code & X.Password == pwd);
+                if (user == null)
+                {
+                    throw new Exception(StatusCode.UserNotFound.ToString());
+                }
+                string json = JsonConvert.SerializeObject(user);
+                response.Data = json;
             }
-            User user = db.User.FirstOrDefault<User>(X => X.UserCode == code & X.Password == pwd);
-            if (user == null)
+            catch (Exception ex)
             {
-                status.Msg = "用户不存在";
-                return status.ToString();
+                if (ex.Message == StatusCode.ArgsNull.ToString())
+                {
+                    response.Code = StatusCode.ArgsNull;
+                }
+                else if (ex.Message == StatusCode.UserNotFound.ToString())
+                {
+                    response.Code = StatusCode.UserNotFound;
+                }
+                else
+                {
+                    response.Code = StatusCode.Error;
+                }
             }
-            string json = JsonConvert.SerializeObject(user);
-            return json;
+
+            return response.ToString();
         }
 
 
