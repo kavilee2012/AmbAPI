@@ -49,7 +49,7 @@ namespace AmbAPI.Controllers
                 User u = db.User.FirstOrDefault<User>(X => X.UserCode == user.UserCode);
                 if (u != null)
                 {
-                    throw new Exception(StatusCode.UserHadExist.ToString());
+                    throw new Exception(StatusCode.ObjectHadExist.ToString());
                 }
 
                 db.User.Add(user);
@@ -61,9 +61,9 @@ namespace AmbAPI.Controllers
                 {
                     response.Code = StatusCode.ArgsNull;
                 }
-                else if (ex.Message == StatusCode.UserHadExist.ToString())
+                else if (ex.Message == StatusCode.ObjectHadExist.ToString())
                 {
-                    response.Code = StatusCode.UserHadExist;
+                    response.Code = StatusCode.ObjectHadExist;
                 }
                 else
                 {
@@ -92,7 +92,7 @@ namespace AmbAPI.Controllers
                 User user = db.User.FirstOrDefault<User>(X => X.UserCode == code & X.Password == pwd);
                 if (user == null)
                 {
-                    throw new Exception(StatusCode.UserNotFound.ToString());
+                    throw new Exception(StatusCode.ObjectNotFound.ToString());
                 }
                 string json = JsonConvert.SerializeObject(user);
                 response.Data = json;
@@ -103,9 +103,9 @@ namespace AmbAPI.Controllers
                 {
                     response.Code = StatusCode.ArgsNull;
                 }
-                else if (ex.Message == StatusCode.UserNotFound.ToString())
+                else if (ex.Message == StatusCode.ObjectNotFound.ToString())
                 {
-                    response.Code = StatusCode.UserNotFound;
+                    response.Code = StatusCode.ObjectNotFound;
                 }
                 else
                 {
@@ -118,77 +118,125 @@ namespace AmbAPI.Controllers
 
 
         /// <summary>
-        /// 获取用户列表
-        /// </summary>
-        /// <returns></returns>
-        public string GetList()
-        {
-
-            return "json";
-        }
-
-        /// <summary>
         /// 获取单个用户信息
         /// </summary>
         /// <param name="code">用户代号</param>
         /// <returns>JSON格式用户信息</returns>
+        [HttpGet]
         public string GetOne(string code)
         {
-            return "";
+            MyResponse response = new MyResponse();
+            try
+            {
+                User u = db.User.FirstOrDefault<User>(X => X.UserCode == code);
+                if (u == null)
+                {
+                    throw new Exception(StatusCode.ObjectNotFound.ToString());
+                }
+                string json = JsonConvert.SerializeObject(u);
+                response.Data = json;
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message == StatusCode.ObjectNotFound.ToString())
+                {
+                    response.Code = StatusCode.ObjectNotFound;
+                }
+                else
+                {
+                    response.Code = StatusCode.Error;
+                }
+            }
+            return response.ToString();
         }
 
-
-     
-
-
-        // PUT api/User/5
-        public HttpResponseMessage Update(int id, User user)
+        
+        /// <summary>
+        /// 获取用户列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public string GetList()
         {
-            if (ModelState.IsValid && id == user.ID)
+            MyResponse response = new MyResponse();
+            try
             {
-                db.Entry(user).State = EntityState.Modified;
-
-                try
-                {
-                    db.SaveChanges();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    return Request.CreateResponse(HttpStatusCode.NotFound);
-                }
-
-                return Request.CreateResponse(HttpStatusCode.OK);
+                List<User> userList = db.User.ToList();
+                string json = JsonConvert.SerializeObject(userList);
+                response.Count = userList.Count.ToString();
+                response.Data = json;
             }
-            else
+            catch (Exception ex)
             {
-                return Request.CreateResponse(HttpStatusCode.BadRequest);
+                if (ex.Message == StatusCode.ObjectNotFound.ToString())
+                {
+                    response.Code = StatusCode.ObjectNotFound;
+                }
+                else
+                {
+                    response.Code = StatusCode.Error;
+                }
             }
+            return response.ToString();
         }
 
-      
 
-        //// DELETE api/User/5
-        //public HttpResponseMessage DeleteUser(int id)
-        //{
-        //    User user = db.User.Find(id);
-        //    if (user == null)
-        //    {
-        //        return Request.CreateResponse(HttpStatusCode.NotFound);
-        //    }
+        /// <summary>
+        /// 修改用户信息
+        /// </summary>
+        /// <param name="json"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public string Update(User user)
+        {
+            MyResponse response = new MyResponse();
+            try
+            {
+                HttpRequestMessage rm = new HttpRequestMessage();
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            catch
+            {
+                response.Code = StatusCode.Error;
+            }
+            return response.ToString();
+        }
 
-        //    db.User.Remove(user);
 
-        //    try
-        //    {
-        //        db.SaveChanges();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        return Request.CreateResponse(HttpStatusCode.NotFound);
-        //    }
+        /// <summary>
+        /// 删除用户信息
+        /// </summary>
+        /// <param name="id">用户代号</param>
+        /// <returns></returns>
+        [HttpPost]
+        public string Delete(string code)
+        {
+            MyResponse response = new MyResponse();
+            try
+            {
+                User user = db.User.Find(code);
+                if (user == null)
+                {
+                    throw new Exception(StatusCode.ObjectNotFound.ToString());
+                }
+                db.User.Remove(user);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message == StatusCode.ObjectNotFound.ToString())
+                {
+                    response.Code = StatusCode.ObjectNotFound;
+                }
+                else
+                {
+                    response.Code = StatusCode.Error;
+                }
+            }
+            return response.ToString();
+        }
 
-        //    return Request.CreateResponse(HttpStatusCode.OK, user);
-        //}
 
         protected override void Dispose(bool disposing)
         {

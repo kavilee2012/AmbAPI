@@ -12,7 +12,9 @@ namespace AmbAPI.Models
     {
         public MyContext() : base("AmbConn") 
         {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<MyContext>());
+            //Database.SetInitializer(new DropCreateDatabaseWithSeedData<MyContext>());
+            Database.SetInitializer<MyContext>(null);
+
         }
 
         public DbSet<User> User { get; set; }
@@ -32,6 +34,12 @@ namespace AmbAPI.Models
 
             //禁止生成数据表名的时候使用复数形式
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
+
+
+
         }
+
+        public DbSet<Schedule> Schedules { get; set; }
     }
 }

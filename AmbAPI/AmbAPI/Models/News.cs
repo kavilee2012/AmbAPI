@@ -20,5 +20,7 @@ namespace AmbAPI.Models
         public string Url { get; set; }
 
         public bool IsTop { get; set; }
+
+        public string ImgUrl { get; set; }
     }
 }
