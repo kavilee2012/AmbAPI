@@ -61,7 +61,7 @@ namespace AmbAPI.Models
         {
             Msg = EnumService.GetDescription(Code);
             //string s = JsonConvert.SerializeObject(this);
-            string s = "{\"code\":\"" + (int)Code + "\",\"msg\":\"" + Msg + "\",\"count\":\"" + Count + "\",\"data\":\"" + Data + "\"}";
+            string s = "{\"code\":\"" + (int)Code + "\",\"msg\":\"" + Msg + "\",\"count\":\"" + Count + "\",\"data\":" + Data + "}";
             return s;
         }
     }

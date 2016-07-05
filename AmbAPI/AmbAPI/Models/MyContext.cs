@@ -10,10 +10,11 @@ namespace AmbAPI.Models
 {
     public class MyContext : DbContext
     {
-        public MyContext() : base("AmbConn") 
+        public MyContext()
+            : base("AmbConn")
         {
-            //Database.SetInitializer(new DropCreateDatabaseWithSeedData<MyContext>());
-            Database.SetInitializer<MyContext>(null);
+            Database.SetInitializer(new DropCreateDatabaseWithSeedData<MyContext>());
+            //Database.SetInitializer<MyContext>(null);
 
         }
 

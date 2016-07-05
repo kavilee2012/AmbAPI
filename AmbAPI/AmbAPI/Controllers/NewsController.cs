@@ -23,7 +23,7 @@ namespace AmbAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public string GetList()
+        public HttpResponseMessage GetList()
         {
             MyResponse response = new MyResponse();
             try
@@ -37,7 +37,8 @@ namespace AmbAPI.Controllers
             {
                 response.Code = StatusCode.Error;
             }
-            return response.ToString();
+            //return response.ToString();
+            return new HttpResponseMessage { Content = new StringContent(response.ToString(), System.Text.Encoding.UTF8, "application/json") };
         }
 
 

@@ -9,14 +9,15 @@ namespace AmbAPI.Controllers
 {
     public class TestController : ApiController
     {
-        public string Get()
+        public HttpResponseMessage Get()
         {
-            return "Get()";
+            string json = "{\"errNum\":300202,\"errMsg\":\"Missing apikey\"}";
+            return new HttpResponseMessage { Content = new StringContent(json, System.Text.Encoding.UTF8, "application/json") };
         }
 
-        public string Get(string id)
+        public string Get()
         {
-            return "Get(a)";
+            return "{\"errNum\":300202,\"errMsg\":\"Missing apikey\"}";
         }
 
         public string PostX()

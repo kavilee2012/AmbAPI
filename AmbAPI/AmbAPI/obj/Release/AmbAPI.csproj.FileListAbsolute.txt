@@ -39,8 +39,6 @@ E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\zh-Hans\System.Web.Razor.resources.dll
 E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\zh-Hans\System.Web.WebPages.resources.dll
 E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\zh-Hans\System.Web.WebPages.Deployment.resources.dll
 E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
-E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\obj\Release\AmbAPI.Migrations.InitialCreate.resources
-E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\obj\Release\AmbAPI.csproj.GenerateResource.Cache
 E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\obj\Release\AmbAPI.dll
 E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\obj\Release\AmbAPI.pdb
 E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\System.Net.Http.dll
