@@ -47,10 +47,12 @@ namespace AmbAPI
         [Description("参数不能为空")]
         ArgsNull=3,
 
-        [Description("用户已存在")]
-        UserHadExist=4,
+        [Description("对象不存在")]
+        ObjectNotFound=4,
 
-        [Description("用户不存在")]
-        UserNotFound=5
+        [Description("对象已存在")]
+        ObjectHadExist=5
+
+        
     }
 }

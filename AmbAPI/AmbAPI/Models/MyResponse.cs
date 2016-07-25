@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Newtonsoft.Json;
 
 namespace AmbAPI.Models
 {
@@ -11,6 +12,9 @@ namespace AmbAPI.Models
     /// </summary>
     public class MyResponse
     {
+        /// <summary>
+        /// 默认返回成功状态
+        /// </summary>
         public MyResponse()
         {
             Code = StatusCode.Success;
@@ -56,7 +60,8 @@ namespace AmbAPI.Models
         public override string ToString()
         {
             Msg = EnumService.GetDescription(Code);
-            string s = "{\"code\":\"" + (int)Code + "\",\"msg\":\"" + Msg + "\",\"count\":\"" + Count + "\",\"data\":\"" + Data + "\"}";
+            //string s = JsonConvert.SerializeObject(this);
+            string s = "{\"code\":\"" + (int)Code + "\",\"msg\":\"" + Msg + "\",\"count\":\"" + Count + "\",\"data\":" + Data + "}";
             return s;
         }
     }

@@ -9,7 +9,7 @@ namespace AmbAPI.Models
     public class AccountReport
     {
         [Key]
-        public int Code { get; set; }
+        public int ID { get; set; }
 
         public string KmName { get; set; }
 

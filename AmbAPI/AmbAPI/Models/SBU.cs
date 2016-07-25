@@ -20,8 +20,8 @@ namespace AmbAPI.Models
 
         public string Leader { get; set; }
 
-        [NotMapped]
-        public virtual ICollection<User> Members { get; set; }
+        //[NotMapped]
+        //public virtual ICollection<User> Members { get; set; }
 
 
     }

@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="../Scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#btnUpdate").on("click", function () {
+                //alert("出错了");
+                $.ajax({
+                    url: "../api/user/update",
+                    type: "POST",
+                    data: { UserCode: "li", UserName: "李正" },
+                    success: function (data) {
+                        alert("成功");
+                    },
+                    error: function () {
+                        alert("出错");
+                    }
+                });
+            });
+
+             
+        });
+
+    </script>
+
+
+</head>
+<body>
+    <form id="form1">
+        <button id="btnUpdate" >修改POST</button>
+        <a href="../api/user/getlist">跳转URL</a>
+    </form>
+</body>
+</html>
