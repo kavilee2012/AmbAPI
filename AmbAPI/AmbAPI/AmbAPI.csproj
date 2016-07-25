@@ -128,6 +128,7 @@
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\NewsInfoController.cs" />
     <Compile Include="Controllers\NoticeController.cs" />
+    <Compile Include="Controllers\PhotoController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\SbuController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
@@ -271,6 +272,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="UploadFiles\Photo\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
