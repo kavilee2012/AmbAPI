@@ -16,5 +16,7 @@ namespace AmbAPI.Models
         public DateTime AddTime { get; set; }
 
         public string AddUser { get; set; }
+
+        public string imgInfo{get;set;}
     }
 }

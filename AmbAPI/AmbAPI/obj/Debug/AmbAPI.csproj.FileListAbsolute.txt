@@ -4,9 +4,7 @@ E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\Antlr3.Runtime.dll
 E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\EntityFramework.dll
 E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\Microsoft.Web.Infrastructure.dll
 E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\Newtonsoft.Json.dll
-E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\System.Net.Http.dll
 E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\System.Net.Http.Formatting.dll
-E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\System.Net.Http.WebRequest.dll
 E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\System.Web.Helpers.dll
 E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\System.Web.Http.dll
 E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\System.Web.Http.WebHost.dll
@@ -20,9 +18,7 @@ E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\System.Web.WebPages.Razor.dll
 E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\WebGrease.dll
 E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\EntityFramework.xml
 E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\Newtonsoft.Json.xml
-E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\System.Net.Http.xml
 E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\System.Net.Http.Formatting.xml
-E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\System.Net.Http.WebRequest.xml
 E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\System.Web.Helpers.xml
 E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\System.Web.Http.xml
 E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\System.Web.Http.WebHost.xml
@@ -32,9 +28,7 @@ E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\System.Web.WebPages.xml
 E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\System.Web.WebPages.Deployment.xml
 E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\System.Web.WebPages.Razor.xml
 E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\zh-Hans\EntityFramework.resources.dll
-E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\zh-Hans\System.Net.Http.resources.dll
 E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\zh-Hans\System.Net.Http.Formatting.resources.dll
-E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\zh-Hans\System.Net.Http.WebRequest.resources.dll
 E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\zh-Hans\System.Web.Helpers.resources.dll
 E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\zh-Hans\System.Web.Http.resources.dll
 E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\zh-Hans\System.Web.Http.WebHost.resources.dll
@@ -47,3 +41,4 @@ E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\zh-Hans\System.Web.WebPages.Deployment.re
 E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
 E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\obj\Debug\AmbAPI.dll
 E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\obj\Debug\AmbAPI.pdb
+E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\obj\Debug\AmbAPI.csprojResolveAssemblyReference.cache

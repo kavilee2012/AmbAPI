@@ -15,10 +15,10 @@ namespace AmbAPI.Controllers
             return new HttpResponseMessage { Content = new StringContent(json, System.Text.Encoding.UTF8, "application/json") };
         }
 
-        public string Get()
-        {
-            return "{\"errNum\":300202,\"errMsg\":\"Missing apikey\"}";
-        }
+        //public string Get()
+        //{
+        //    return "{\"errNum\":300202,\"errMsg\":\"Missing apikey\"}";
+        //}
 
         public string PostX()
         {

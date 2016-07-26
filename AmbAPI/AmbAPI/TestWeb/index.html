@@ -29,9 +29,11 @@
 
 </head>
 <body>
-    <form id="form1">
-        <button id="btnUpdate" >修改POST</button>
-        <a href="../api/user/getlist">跳转URL</a>
+    <form id="form1" action="/api/photo/uploadimage" method="post"  enctype="multipart/form-data">
+        <input name="myParameter" type="hidden" value="i dont do anything interesting"/>
+        <input type="file" name="file1" />
+        <input type="file" name="file2" />
+        <input type="submit" value="OK" />
     </form>
 </body>
 </html>
