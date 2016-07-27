@@ -17,6 +17,6 @@ namespace AmbAPI.Models
 
         public string AddUser { get; set; }
 
-        public string imgInfo{get;set;}
+        public string ImgInfo{get;set;}
     }
 }
