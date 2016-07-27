@@ -8,10 +8,12 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using AmbAPI.Models;
+using Newtonsoft.Json;
 
 namespace AmbAPI.Controllers
 {
@@ -20,21 +22,52 @@ namespace AmbAPI.Controllers
         private MyContext db = new MyContext();
 
         // GET api/Photo
-        public IEnumerable<Photo> GetPhotos()
+        [HttpGet]
+        public HttpResponseMessage GetList()
         {
-            return db.Photo.AsEnumerable();
+            MyResponse response = new MyResponse();
+            try
+            {
+                List<Photo> mList = db.Photo.ToList();
+                string json = JsonConvert.SerializeObject(mList);
+                response.Data = json;
+                response.Count = mList.Count.ToString();
+            }
+            catch
+            {
+                response.Code = StatusCode.Error;
+            }
+            //return response.ToString();
+            return new HttpResponseMessage { Content = new StringContent(response.ToString(), System.Text.Encoding.UTF8, "application/json") };
         }
 
         // GET api/Photo/5
-        public Photo GetPhoto(int id)
+        [HttpGet]
+        public string GetOne(int id)
         {
-            Photo photo = db.Photo.Find(id);
-            if (photo == null)
+            MyResponse response = new MyResponse();
+            try
             {
-                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
+                Photo photo = db.Photo.Find(id);
+                if (photo == null)
+                {
+                    throw new Exception(StatusCode.ObjectNotFound.ToString());
+                }
+                string json = JsonConvert.SerializeObject(photo);
+                response.Data = json;
             }
-
-            return photo;
+            catch (Exception ex)
+            {
+                if (ex.Message == StatusCode.ObjectNotFound.ToString())
+                {
+                    response.Code = StatusCode.ObjectNotFound;
+                }
+                else
+                {
+                    response.Code = StatusCode.Error;
+                }
+            }
+            return response.ToString();
         }
 
         // PUT api/Photo/5
@@ -108,7 +141,7 @@ namespace AmbAPI.Controllers
         {
             MyResponse response = new MyResponse();
 
-            string filePath = "~//UploadFiles//Photo";
+            string filePath = "~\\UploadFiles\\Photo";
             // 取得文件夹
             string dir = HttpContext.Current.Server.MapPath(filePath);
             //如果不存在文件夹，就创建文件夹
@@ -128,9 +161,17 @@ namespace AmbAPI.Controllers
 
                 foreach (MultipartFileData file in provider.FileData)
                 {
-                    //接收文件
-                    //Trace.WriteLine(file.Headers.ContentDisposition.FileName);//获取上传文件实际的文件名
-                    //Trace.WriteLine(file.LocalFileName);
+                    //file.Headers.ContentDisposition.FileName;//上传文件前的文件名
+                    //file.LocalFileName;//上传后的文件名
+                    Photo p = new Photo();
+                    p.ImgInfo = file.LocalFileName.Substring(file.LocalFileName.LastIndexOf("\\"));
+                    p.Sort = "员工相册";
+                    p.AddUser = "admin";
+                    p.AddTime = DateTime.Now;
+                    p.Url = filePath + p.ImgInfo;
+
+                    db.Photo.Add(p);
+                    db.SaveChanges();
                 }
 
                 foreach (string key in provider.FormData.AllKeys)
@@ -151,6 +192,20 @@ namespace AmbAPI.Controllers
         }
 
 
+        //public HttpResponseMessage DownloadImage(string url)
+        //{
+        //    //string filePath = HttpContext.Current.Server.MapPath(url);
+        //    //FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read,FileShare.Read);
+        //    //HttpResponseMessage respone = new HttpResponseMessage();
+        //    //respone.Content = new StreamContent(fs);
+        //    //response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment");
+        //    //response.Content.Headers.ContentDisposition.FileName = customFileName;
+        //    //response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");  // 这句话要告诉浏览器要下载文件  
+        //    //response.Content.Headers.ContentLength = new FileInfo(filePath).Length;
+        //    //return response;  
+        //}
+
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
@@ -159,16 +214,16 @@ namespace AmbAPI.Controllers
     }
 }
 
-//重写文件名保存
-public class CustomMultipartFormDataStreamProvider : MultipartFormDataStreamProvider 
-{
-    public CustomMultipartFormDataStreamProvider(string path)
-        : base(path)
-    { }
-
-    public override string GetLocalFileName(System.Net.Http.Headers.HttpContentHeaders headers)
+    //重写上传文件名
+    public class CustomMultipartFormDataStreamProvider : MultipartFormDataStreamProvider 
     {
-        string fileName = DateTime.Now.ToString("yyyyMMddHHmmssfff");
-        return fileName + "_" + headers.ContentDisposition.FileName.Replace("\"", string.Empty);//base.GetLocalFileName(headers);
+        public CustomMultipartFormDataStreamProvider(string path)
+            : base(path)
+        { }
+
+        public override string GetLocalFileName(System.Net.Http.Headers.HttpContentHeaders headers)
+        {
+            string fileName = DateTime.Now.ToString("yyyyMMddHHmmssfff");
+            return fileName + "_" + headers.ContentDisposition.FileName.Replace("\"", string.Empty);//base.GetLocalFileName(headers);
+        }
     }
-}
