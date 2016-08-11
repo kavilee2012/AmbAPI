@@ -6,14 +6,19 @@ using System.Web;
 
 namespace AmbAPI.Models
 {
-    public class DropCreateDatabaseWithSeedData<T> : DropCreateDatabaseIfModelChanges<MyContext>
+    public class CreateDatabaseWithSeedData<T> : CreateDatabaseIfNotExists<MyContext>  //DropCreateDatabaseIfModelChanges<MyContext>
     {
         protected override void Seed(MyContext context)
+        {
+            LoadSeed(context);
+            base.Seed(context);
+        }
+
+        public void LoadSeed(MyContext context)
         {
             GetNews().ForEach(X => context.News.Add(X));
             GetReports().ForEach(X => context.AccountReport.Add(X));
             GetSbus().ForEach(X => context.SBU.Add(X));
-            base.Seed(context);
         }
 
         #region 新增新闻
@@ -153,25 +158,25 @@ namespace AmbAPI.Models
         {
             var sbus = new List<SBU>{
                 new SBU{
-                    Code="A001",
+                    ID=1,
                     Name="AAA",
-                    Description="来源ERP财务部",
+                    Remark="来源ERP财务部",
                     AddTime=DateTime.Now,
-                    Leader="aa"
+                    Header="aa"
                 },
                 new SBU{
-                    Code="A002",
+                    ID=2,
                     Name="BBB",
-                    Description="来源ERP直销部",
+                    Remark="来源ERP直销部",
                     AddTime=DateTime.Now,
-                    Leader="bb"
+                    Header="bb"
                 },
                 new SBU{
-                    Code="A003",
+                    ID=3,
                     Name="CCC",
-                    Description="来源ERP客服部",
+                    Remark="来源ERP客服部",
                     AddTime=DateTime.Now,
-                    Leader="cc"
+                    Header="cc"
                 }
             };
             return sbus;

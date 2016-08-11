@@ -9,7 +9,6 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using AmbAPI.Models;
-using Newtonsoft.Json;
 
 namespace AmbAPI.Controllers
 {
@@ -17,177 +16,88 @@ namespace AmbAPI.Controllers
     {
         private MyContext db = new MyContext();
 
-        /// <summary>
-        /// 获取根列表
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public string GetList()
+        // GET api/Report
+        public IEnumerable<Report> GetReports()
         {
-            MyResponse response = new MyResponse();
-            try
-            {
-                List<AccountReport> reportList = db.AccountReport.Where(X => X.Level == 0).ToList();
-                string json = JsonConvert.SerializeObject(reportList);
-                response.Count = reportList.Count.ToString();
-                response.Data = json;
-            }
-            catch (Exception ex)
-            {
-                if (ex.Message == StatusCode.ObjectNotFound.ToString())
-                {
-                    response.Code = StatusCode.ObjectNotFound;
-                }
-                else
-                {
-                    response.Code = StatusCode.Error;
-                }
-            }
-            return response.ToString();
+            return db.Reports.AsEnumerable();
         }
 
-
-        /// <summary>
-        /// 根据父ID获取子列表
-        /// </summary>
-        /// <param name="fid"></param>
-        /// <returns></returns>
-        [HttpGet]
-        public string GetList(int fid)
+        // GET api/Report/5
+        public Report GetReport(int id)
         {
-            MyResponse response = new MyResponse();
-            try
+            Report report = db.Reports.Find(id);
+            if (report == null)
             {
-                List<AccountReport> reportList = db.AccountReport.Where(X => X.FatherID == fid).ToList();
-                string json = JsonConvert.SerializeObject(reportList);
-                response.Count = reportList.Count.ToString();
-                response.Data = json;
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
             }
-            catch (Exception ex)
-            {
-                if (ex.Message == StatusCode.ObjectNotFound.ToString())
-                {
-                    response.Code = StatusCode.ObjectNotFound;
-                }
-                else
-                {
-                    response.Code = StatusCode.Error;
-                }
-            }
-            return response.ToString();
+
+            return report;
         }
 
-
-        /// <summary>
-        /// 获取单个报表项
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpGet]
-        public string GetOne(int id)
+        // PUT api/Report/5
+        public HttpResponseMessage PutReport(int id, Report report)
         {
-            MyResponse response = new MyResponse();
-            try
+            if (ModelState.IsValid && id == report.ID)
             {
-                AccountReport accountreport = db.AccountReport.Find(id);
-                if (accountreport == null)
+                db.Entry(report).State = EntityState.Modified;
+
+                try
                 {
-                    throw new Exception(StatusCode.ObjectNotFound.ToString());
+                    db.SaveChanges();
                 }
-                string json = JsonConvert.SerializeObject(accountreport);
-                response.Data = json;
+                catch (DbUpdateConcurrencyException)
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound);
+                }
+
+                return Request.CreateResponse(HttpStatusCode.OK);
             }
-            catch(Exception ex)
+            else
             {
-                if (ex.Message == StatusCode.ObjectNotFound.ToString())
-                {
-                    response.Code = StatusCode.ObjectNotFound;
-                }
-                else
-                {
-                    response.Code = StatusCode.Error;
-                }
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
-            return response.ToString();
         }
 
-        /// <summary>
-        /// 添加报表项
-        /// </summary>
-        /// <param name="accountreport"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public string Add(AccountReport accountreport)
+        // POST api/Report
+        public HttpResponseMessage PostReport(Report report)
         {
-            MyResponse response = new MyResponse();
+            if (ModelState.IsValid)
+            {
+                db.Reports.Add(report);
+                db.SaveChanges();
+
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, report);
+                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = report.ID }));
+                return response;
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+        }
+
+        // DELETE api/Report/5
+        public HttpResponseMessage DeleteReport(int id)
+        {
+            Report report = db.Reports.Find(id);
+            if (report == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+
+            db.Reports.Remove(report);
+
             try
             {
-                db.AccountReport.Add(accountreport);
                 db.SaveChanges();
             }
-            catch
+            catch (DbUpdateConcurrencyException)
             {
-                response.Code = StatusCode.Error;
+                return Request.CreateResponse(HttpStatusCode.NotFound);
             }
-            return response.ToString();
+
+            return Request.CreateResponse(HttpStatusCode.OK, report);
         }
-
-
-        /// <summary>
-        /// 修改报表项
-        /// </summary>
-        /// <param name="accountreport"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public string Update(AccountReport accountreport)
-        {
-            MyResponse response = new MyResponse();
-            try
-            {
-                db.Entry(accountreport).State = EntityState.Modified;
-                db.SaveChanges();
-            }
-            catch
-            {
-                response.Code = StatusCode.Error;
-            }
-            return response.ToString();
-        }
-
-        
-        /// <summary>
-        /// 删除报表项
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpGet]
-        public string Delete(int id)
-        {
-            MyResponse response = new MyResponse();
-            try
-            {
-                AccountReport accountreport = db.AccountReport.Find(id);
-                if (accountreport == null)
-                {
-                    throw new Exception(StatusCode.ObjectNotFound.ToString());
-                }
-                db.AccountReport.Remove(accountreport);
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                if (ex.Message == StatusCode.ObjectNotFound.ToString())
-                {
-                    response.Code = StatusCode.ObjectNotFound;
-                }
-                else
-                {
-                    response.Code = StatusCode.Error;
-                }
-            }
-            return response.ToString();
-        }
-
 
         protected override void Dispose(bool disposing)
         {

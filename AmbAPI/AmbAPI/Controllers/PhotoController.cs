@@ -169,6 +169,7 @@ namespace AmbAPI.Controllers
                     p.AddUser = "admin";
                     p.AddTime = DateTime.Now;
                     p.Url = filePath + p.ImgInfo;
+                    p.BelongID = 0;
 
                     db.Photo.Add(p);
                     db.SaveChanges();

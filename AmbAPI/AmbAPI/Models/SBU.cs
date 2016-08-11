@@ -10,19 +10,23 @@ namespace AmbAPI.Models
     public class SBU
     {
         [Key]
-        public string Code { get; set; }
+        public int ID { get; set; }
+
+        public int FatherID { get; set; }
+
+        public int Level { get; set; }
+
+        public int Order { get; set; }
 
         public string Name { get; set; }
 
-        public string Description { get; set; }
+        public string Remark { get; set; }
 
         public DateTime AddTime { get; set; }
 
-        public string Leader { get; set; }
+        public string Header { get; set; }
 
-        //[NotMapped]
-        //public virtual ICollection<User> Members { get; set; }
-
+        public int MemberCount { get; set; }
 
     }
 }

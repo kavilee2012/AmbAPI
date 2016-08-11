@@ -20,6 +20,11 @@ namespace AmbAPI.Models
 
         public string Mobile { get; set; }
 
-        public string SBU { get; set; }
+        public int SbuID { get; set; }
+
+        public bool Sex { get; set; }
+
+        public int PhotoID{get;set;}
+
     }
 }

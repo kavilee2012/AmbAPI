@@ -127,7 +127,7 @@ namespace AmbAPI.Controllers
             try
             {
                 //判断要改的新名字是否存在
-                SBU _sbu = db.SBU.Find(sbu.Code);
+                SBU _sbu = db.SBU.Find(sbu.Name);
                 if (_sbu == null)
                 {
                     throw new Exception(StatusCode.ObjectNotFound.ToString());

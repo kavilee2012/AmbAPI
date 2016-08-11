@@ -6,8 +6,7 @@ using System.Web;
 
 namespace AmbAPI.Models
 {
-    public class AccountReport
-    {
+    public class AccountReport    {
         [Key]
         public int ID { get; set; }
 
