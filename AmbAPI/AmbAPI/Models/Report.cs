@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -9,20 +10,23 @@ namespace AmbAPI.Models
     public class Report
     {
         int id;
-
         public int ID
         {
             get { return id; }
             set { id = value; }
         }
 
-
-        int fatherId;
-
-        public int FatherID
+        public String Code
         {
-            get { return fatherId; }
-            set { fatherId = value; }
+            get;
+            set;
+        }
+
+
+        public String FatherCode
+        {
+            get;
+            set;
         }
 
 

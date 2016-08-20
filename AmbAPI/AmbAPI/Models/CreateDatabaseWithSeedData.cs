@@ -14,11 +14,12 @@ namespace AmbAPI.Models
             base.Seed(context);
         }
 
-        public void LoadSeed(MyContext context)
+        public static void LoadSeed(MyContext context)
         {
             GetNews().ForEach(X => context.News.Add(X));
-            GetReports().ForEach(X => context.AccountReport.Add(X));
+            GetReports().ForEach(X => context.Reports.Add(X));
             GetSbus().ForEach(X => context.SBU.Add(X));
+            GetUsers().ForEach(X => context.User.Add(X));
         }
 
         #region 新增新闻
@@ -130,23 +131,154 @@ namespace AmbAPI.Models
         #endregion
 
         #region 经营会计报表结构
-        private static List<AccountReport> GetReports()
+        private static List<Report> GetReports()
         {
-            var reports = new List<AccountReport>{
-                new AccountReport{
-                    KmName="收入",
-                    FatherID=0,
-                    Level=1
+            var reports = new List<Report>{
+                new Report{
+                    Code="100",
+                    FatherCode="0",
+                    Level=0,
+                    Order=100,
+                    Name="销售额",
+                    Remark=""
                 },
-                new AccountReport{
-                    KmName="支出",
-                    FatherID=0,
-                    Level=1
+                new Report{
+                    Code="200",
+                    FatherCode="0",
+                    Level=0,
+                    Order=200,
+                    Name="变动费",
+                    Remark=""
                 },
-                new AccountReport{
-                    KmName="利润",
-                    FatherID=0,
-                    Level=1
+                new Report{
+                    Code="300",
+                    FatherCode="0",
+                    Level=0,
+                    Order=300,
+                    Name="边界利益",
+                    Remark=""
+                },
+                new Report{
+                    Code="400",
+                    FatherCode="0",
+                    Level=0,
+                    Order=400,
+                    Name="边界利益率",
+                    Remark=""
+                },
+                new Report{
+                    Code="500",
+                    FatherCode="0",
+                    Level=0,
+                    Order=500,
+                    Name="固定费用",
+                    Remark=""
+                },
+                new Report{
+                    Code="600",
+                    FatherCode="0",
+                    Level=0,
+                    Order=600,
+                    Name="经营利益",
+                    Remark=""
+                },
+                new Report{
+                    Code="700",
+                    FatherCode="0",
+                    Level=0,
+                    Order=700,
+                    Name="经营利益率",
+                    Remark=""
+                },
+
+                new Report{
+                    Code="101",
+                    FatherCode="100",
+                    Level=1,
+                    Order=1,
+                    Name="主营业务收入",
+                    Remark=""
+                },
+                new Report{
+                    Code="102",
+                    FatherCode="100",
+                    Level=1,
+                    Order=2,
+                    Name="其它业务收入",
+                    Remark=""
+                },
+                new Report{
+                    Code="103",
+                    FatherCode="100",
+                    Level=1,
+                    Order=3,
+                    Name="非业务收入",
+                    Remark=""
+                },
+
+                new Report{
+                    Code="201",
+                    FatherCode="200",
+                    Level=1,
+                    Order=1,
+                    Name="生产成本",
+                    Remark=""
+                },
+                new Report{
+                    Code="202",
+                    FatherCode="200",
+                    Level=1,
+                    Order=2,
+                    Name="销售成本",
+                    Remark=""
+                },
+                new Report{
+                    Code="203",
+                    FatherCode="200",
+                    Level=1,
+                    Order=3,
+                    Name="研发成本",
+                    Remark=""
+                },
+                new Report{
+                    Code="204",
+                    FatherCode="200",
+                    Level=1,
+                    Order=4,
+                    Name="其它变动费",
+                    Remark=""
+                },
+                new Report{
+                    Code="501",
+                    FatherCode="500",
+                    Level=1,
+                    Order=1,
+                    Name="员工工资",
+                    Remark=""
+                },
+                new Report{
+                    Code="502",
+                    FatherCode="500",
+                    Level=1,
+                    Order=2,
+                    Name="办公费用",
+                    Remark=""
+                },
+                new Report{
+                    Code="503",
+                    FatherCode="500",
+                    Level=1,
+                    Order=3,
+                    Name="场地费用",
+                    Remark=""
+                },
+                new Report{
+                    Code="504",
+                    FatherCode="500",
+                    Level=1,
+                    Order=4,
+                    Name="其它固定费用",
+                    Remark=""
                 }
             };
             return reports;
@@ -158,28 +290,126 @@ namespace AmbAPI.Models
         {
             var sbus = new List<SBU>{
                 new SBU{
-                    ID=1,
-                    Name="AAA",
+                    Code="100",
+                    FatherCode="0",
+                    Level=0,
+                    Order=100,
+                    Name="采购事业部",
+                    Remark="来源ERP采购部",
+                    Header="张丽",
+                    MemberCount=12
+                },
+                new SBU{
+                    Code="200",
+                    FatherCode="0",
+                    Level=0,
+                    Order=200,
+                    Name="生产事业部",
+                    Remark="来源ERP生产部",
+                    Header="王华春",
+                    MemberCount=338
+                },
+                new SBU{
+                    Code="300",
+                    FatherCode="0",
+                    Level=0,
+                    Order=300,
+                    Name="装配事业部",
+                    Remark="来源ERP装配部",
+                    Header="李玉强",
+                    MemberCount=156
+                },
+                new SBU{
+                    Code="400",
+                    FatherCode="0",
+                    Level=0,
+                    Order=300,
+                    Name="物流事业部",
+                    Remark="来源ERP物流部",
+                    Header="李子华",
+                    MemberCount=53
+                },
+                new SBU{
+                    Code="500",
+                    FatherCode="0",
+                    Level=0,
+                    Order=500,
+                    Name="销售事业部",
+                    Remark="来源ERP销售部",
+                    Header="李子华",
+                    MemberCount=26
+                },
+                new SBU{
+                    Code="600",
+                    FatherCode="0",
+                    Level=0,
+                    Order=600,
+                    Name="行政事业部",
+                    Remark="来源ERP行政部",
+                    Header="张亮",
+                    MemberCount=32
+                },
+                new SBU{
+                    Code="700",
+                    FatherCode="0",
+                    Level=0,
+                    Order=700,
+                    Name="财务事业部",
                     Remark="来源ERP财务部",
-                    AddTime=DateTime.Now,
-                    Header="aa"
+                    Header="马蓉春",
+                    MemberCount=15
+                },
+
+                new SBU{
+                    Code="201",
+                    FatherCode="200",
+                    Level=1,
+                    Order=1,
+                    Name="原材料加工事业部",
+                    Remark="来源ERP生产部",
+                    Header="李响",
+                    MemberCount=22
                 },
                 new SBU{
-                    ID=2,
-                    Name="BBB",
-                    Remark="来源ERP直销部",
-                    AddTime=DateTime.Now,
-                    Header="bb"
-                },
-                new SBU{
-                    ID=3,
-                    Name="CCC",
-                    Remark="来源ERP客服部",
-                    AddTime=DateTime.Now,
-                    Header="cc"
+                    Code="202",
+                    FatherCode="200",
+                    Level=1,
+                    Order=2,
+                    Name="质检事业部",
+                    Remark="来源ERP生产部",
+                    Header="崔霞",
+                    MemberCount=5
                 }
             };
             return sbus;
+        }
+        #endregion
+
+        #region User
+        private static List<User> GetUsers()
+        {
+            var list = new List<User>{
+                new User{
+                    UserCode="admin",
+                    UserName="系统管理员",
+                    Password="1",
+                    Mobile="15876500757",
+                    Sex=true,
+                    SbuCode="100",
+                    PhotoID=1
+
+                },
+                new User{
+                    UserCode="lz",
+                    UserName="李煜辰",
+                    Password="1",
+                    Mobile="15876500757",
+                    Sex=false,
+                    SbuCode="200",
+                    PhotoID=2
+                }
+            };
+            return list;
         }
         #endregion
     }

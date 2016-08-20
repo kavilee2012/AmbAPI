@@ -8,11 +8,12 @@ using System.Web;
 namespace AmbAPI.Models
 {
     public class SBU
-    {
-        [Key]
+    { 
         public int ID { get; set; }
 
-        public int FatherID { get; set; }
+        public String Code{get;set;}
+
+        public String FatherCode{get;set;}
 
         public int Level { get; set; }
 
@@ -21,8 +22,6 @@ namespace AmbAPI.Models
         public string Name { get; set; }
 
         public string Remark { get; set; }
-
-        public DateTime AddTime { get; set; }
 
         public string Header { get; set; }
 

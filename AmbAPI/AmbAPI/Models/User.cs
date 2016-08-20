@@ -9,9 +9,9 @@ namespace AmbAPI.Models
 {
     public class User
     {
+        [Key]
         public int ID { get; set; }
 
-        [Key]
         public string UserCode { get; set; }
 
         public string UserName { get; set; }
@@ -20,7 +20,7 @@ namespace AmbAPI.Models
 
         public string Mobile { get; set; }
 
-        public int SbuID { get; set; }
+        public string SbuCode { get; set; }
 
         public bool Sex { get; set; }
 

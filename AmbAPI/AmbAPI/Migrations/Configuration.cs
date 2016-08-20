@@ -27,6 +27,7 @@ namespace AmbAPI.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+            //CreateDatabaseWithSeedData<MyContext>.LoadSeed(context); //初始化数据，每次迁移都会执行，所以注意不用的时候要注释掉
         }
     }
 }
