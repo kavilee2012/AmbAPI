@@ -123,7 +123,7 @@ namespace AmbAPI.Controllers
         /// <param name="code">用户代号</param>
         /// <returns>JSON格式用户信息</returns>
         [HttpGet]
-        public string GetOne(string code)
+        public HttpResponseMessage GetOne(string code)
         {
             MyResponse response = new MyResponse();
             try
@@ -147,7 +147,7 @@ namespace AmbAPI.Controllers
                     response.Code = StatusCode.Error;
                 }
             }
-            return response.ToString();
+            return new HttpResponseMessage { Content = new StringContent(response.ToString(), System.Text.Encoding.UTF8, "application/json") };
         }
 
         

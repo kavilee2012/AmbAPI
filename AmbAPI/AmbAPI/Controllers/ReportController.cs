@@ -18,18 +18,18 @@ namespace AmbAPI.Controllers
         private MyContext db = new MyContext();
 
         /// <summary>
-        /// 获取根列表
+        /// 获取全部
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public string GetList()
+        public HttpResponseMessage GetList()
         {
             MyResponse response = new MyResponse();
             try
             {
-                List<AccountReport> reportList = db.AccountReport.Where(X => X.Level == 0).ToList();
-                string json = JsonConvert.SerializeObject(reportList);
-                response.Count = reportList.Count.ToString();
+                List<Report> list = db.Reports.ToList();
+                string json = JsonConvert.SerializeObject(list);
+                response.Count = list.Count.ToString();
                 response.Data = json;
             }
             catch (Exception ex)
@@ -43,136 +43,27 @@ namespace AmbAPI.Controllers
                     response.Code = StatusCode.Error;
                 }
             }
-            return response.ToString();
+            return new HttpResponseMessage { Content = new StringContent(response.ToString(), System.Text.Encoding.UTF8, "application/json") };
         }
 
-
         /// <summary>
-        /// 根据父ID获取子列表
-        /// </summary>
-        /// <param name="fid"></param>
-        /// <returns></returns>
-        [HttpGet]
-        public string GetList(int fid)
-        {
-            MyResponse response = new MyResponse();
-            try
-            {
-                List<AccountReport> reportList = db.AccountReport.Where(X => X.FatherID == fid).ToList();
-                string json = JsonConvert.SerializeObject(reportList);
-                response.Count = reportList.Count.ToString();
-                response.Data = json;
-            }
-            catch (Exception ex)
-            {
-                if (ex.Message == StatusCode.ObjectNotFound.ToString())
-                {
-                    response.Code = StatusCode.ObjectNotFound;
-                }
-                else
-                {
-                    response.Code = StatusCode.Error;
-                }
-            }
-            return response.ToString();
-        }
-
-
-        /// <summary>
-        /// 获取单个报表项
+        /// 获取单个
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        public string GetOne(int id)
+        public HttpResponseMessage GetOne(string id)
         {
             MyResponse response = new MyResponse();
             try
             {
-                AccountReport accountreport = db.AccountReport.Find(id);
-                if (accountreport == null)
+                Report m = db.Reports.Find(id);
+                if (m == null)
                 {
                     throw new Exception(StatusCode.ObjectNotFound.ToString());
                 }
-                string json = JsonConvert.SerializeObject(accountreport);
+                string json = JsonConvert.SerializeObject(m);
                 response.Data = json;
-            }
-            catch(Exception ex)
-            {
-                if (ex.Message == StatusCode.ObjectNotFound.ToString())
-                {
-                    response.Code = StatusCode.ObjectNotFound;
-                }
-                else
-                {
-                    response.Code = StatusCode.Error;
-                }
-            }
-            return response.ToString();
-        }
-
-        /// <summary>
-        /// 添加报表项
-        /// </summary>
-        /// <param name="accountreport"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public string Add(AccountReport accountreport)
-        {
-            MyResponse response = new MyResponse();
-            try
-            {
-                db.AccountReport.Add(accountreport);
-                db.SaveChanges();
-            }
-            catch
-            {
-                response.Code = StatusCode.Error;
-            }
-            return response.ToString();
-        }
-
-
-        /// <summary>
-        /// 修改报表项
-        /// </summary>
-        /// <param name="accountreport"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public string Update(AccountReport accountreport)
-        {
-            MyResponse response = new MyResponse();
-            try
-            {
-                db.Entry(accountreport).State = EntityState.Modified;
-                db.SaveChanges();
-            }
-            catch
-            {
-                response.Code = StatusCode.Error;
-            }
-            return response.ToString();
-        }
-
-        
-        /// <summary>
-        /// 删除报表项
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpGet]
-        public string Delete(int id)
-        {
-            MyResponse response = new MyResponse();
-            try
-            {
-                AccountReport accountreport = db.AccountReport.Find(id);
-                if (accountreport == null)
-                {
-                    throw new Exception(StatusCode.ObjectNotFound.ToString());
-                }
-                db.AccountReport.Remove(accountreport);
-                db.SaveChanges();
             }
             catch (Exception ex)
             {
@@ -185,9 +76,73 @@ namespace AmbAPI.Controllers
                     response.Code = StatusCode.Error;
                 }
             }
-            return response.ToString();
+            return new HttpResponseMessage { Content = new StringContent(response.ToString(), System.Text.Encoding.UTF8, "application/json") };
         }
 
+        //// PUT api/Report/5
+        //public HttpResponseMessage PutReport(int id, Report report)
+        //{
+        //    if (ModelState.IsValid && id == report.ID)
+        //    {
+        //        db.Entry(report).State = EntityState.Modified;
+
+        //        try
+        //        {
+        //            db.SaveChanges();
+        //        }
+        //        catch (DbUpdateConcurrencyException)
+        //        {
+        //            return Request.CreateResponse(HttpStatusCode.NotFound);
+        //        }
+
+        //        return Request.CreateResponse(HttpStatusCode.OK);
+        //    }
+        //    else
+        //    {
+        //        return Request.CreateResponse(HttpStatusCode.BadRequest);
+        //    }
+        //}
+
+        //// POST api/Report
+        //public HttpResponseMessage PostReport(Report report)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Reports.Add(report);
+        //        db.SaveChanges();
+
+        //        HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, report);
+        //        response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = report.ID }));
+        //        return response;
+        //    }
+        //    else
+        //    {
+        //        return Request.CreateResponse(HttpStatusCode.BadRequest);
+        //    }
+        //}
+
+        //// DELETE api/Report/5
+        //public HttpResponseMessage DeleteReport(int id)
+        //{
+        //    Report report = db.Reports.Find(id);
+        //    if (report == null)
+        //    {
+        //        return Request.CreateResponse(HttpStatusCode.NotFound);
+        //    }
+
+        //    db.Reports.Remove(report);
+
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        return Request.CreateResponse(HttpStatusCode.NotFound);
+        //    }
+
+        //    return Request.CreateResponse(HttpStatusCode.OK, report);
+        //}
 
         protected override void Dispose(bool disposing)
         {

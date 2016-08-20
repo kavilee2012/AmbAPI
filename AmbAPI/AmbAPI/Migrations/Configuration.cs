@@ -4,6 +4,7 @@ namespace AmbAPI.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using AmbAPI.Models;
 
     internal sealed class Configuration : DbMigrationsConfiguration<AmbAPI.Models.MyContext>
     {
@@ -26,6 +27,7 @@ namespace AmbAPI.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+            //CreateDatabaseWithSeedData<MyContext>.LoadSeed(context); //初始化数据，每次迁移都会执行，所以注意不用的时候要注释掉
         }
     }
 }

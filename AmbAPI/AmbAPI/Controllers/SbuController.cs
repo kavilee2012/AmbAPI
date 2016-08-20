@@ -22,7 +22,7 @@ namespace AmbAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public string GetList()
+        public HttpResponseMessage GetList()
         {
             MyResponse response = new MyResponse();
             try
@@ -43,7 +43,7 @@ namespace AmbAPI.Controllers
                     response.Code = StatusCode.Error;
                 }
             }
-            return response.ToString();
+            return new HttpResponseMessage { Content = new StringContent(response.ToString(), System.Text.Encoding.UTF8, "application/json") };
         }
 
 
@@ -53,7 +53,7 @@ namespace AmbAPI.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        public string GetOne(string id)
+        public HttpResponseMessage GetOne(string id)
         {
             MyResponse response = new MyResponse();
             try
@@ -77,7 +77,7 @@ namespace AmbAPI.Controllers
                     response.Code = StatusCode.Error;
                 }
             }
-            return response.ToString();
+            return new HttpResponseMessage { Content = new StringContent(response.ToString(), System.Text.Encoding.UTF8, "application/json") };
         }
 
 
@@ -127,7 +127,7 @@ namespace AmbAPI.Controllers
             try
             {
                 //判断要改的新名字是否存在
-                SBU _sbu = db.SBU.Find(sbu.Code);
+                SBU _sbu = db.SBU.Find(sbu.Name);
                 if (_sbu == null)
                 {
                     throw new Exception(StatusCode.ObjectNotFound.ToString());

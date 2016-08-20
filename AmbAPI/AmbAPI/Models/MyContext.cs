@@ -13,7 +13,9 @@ namespace AmbAPI.Models
         public MyContext()
             : base("AmbConn")
         {
-            Database.SetInitializer(new DropCreateDatabaseWithSeedData<MyContext>());
+            Database.SetInitializer(new CreateDatabaseWithSeedData<MyContext>());
+           // Database.Initialize(true);
+
             //Database.SetInitializer<MyContext>(null);
 
         }
@@ -27,6 +29,7 @@ namespace AmbAPI.Models
         public DbSet<Notice> Notice { get; set; }
         public DbSet<Photo> Photo { get; set; }
         public DbSet<AccountReport> AccountReport { get; set; }
+        public DbSet<Test> Test { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -38,9 +41,11 @@ namespace AmbAPI.Models
 
 
 
-
+           
         }
 
         public DbSet<Schedule> Schedules { get; set; }
+
+        public DbSet<Report> Reports { get; set; }
     }
 }

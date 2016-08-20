@@ -18,7 +18,5 @@ namespace AmbAPI.Models
         public string Publisher { get; set; }
 
         public int ViewCount { get; set; }
-
-        public int aa { get; set; }
     }
 }

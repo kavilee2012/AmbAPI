@@ -5,16 +5,16 @@ using System.Web;
 
 namespace AmbAPI.Models
 {
-    public class Schedule
+    public class Test
     {
         public int ID { get; set; }
 
-        public String UserCode { get; set; }
-
-        public DateTime ScheduleTime { get; set; }
-
         public string Content { get; set; }
 
+        public string AddUser { get; set; }
 
+        public DateTime AddTime { get; set; }
+
+        public String aa { get; set; }
     }
 }
