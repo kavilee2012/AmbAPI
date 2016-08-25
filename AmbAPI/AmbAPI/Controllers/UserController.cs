@@ -80,7 +80,7 @@ namespace AmbAPI.Controllers
         /// <param name="pwd">密码</param>
         /// <returns></returns>
         [HttpGet]
-        public string Login(string code, string pwd)
+        public HttpResponseMessage Login(string code, string pwd)
         {
             MyResponse response = new MyResponse();
             try
@@ -94,7 +94,26 @@ namespace AmbAPI.Controllers
                 {
                     throw new Exception(StatusCode.ObjectNotFound.ToString());
                 }
-                string json = JsonConvert.SerializeObject(user);
+
+                string token = CommonService.StrToMD5(code + pwd); //验证通过返回token,并保存到数据库
+
+                AmbToken oldToken = db.AmbToken.FirstOrDefault<AmbToken>(X => X.Token == token);
+                if (oldToken != null)
+                {
+                    db.AmbToken.Remove(oldToken);
+                    db.SaveChanges();
+                }
+
+                AmbToken m = new AmbToken();
+                m.Token = token;
+                m.Code = code;
+                m.ExpireTime = DateTime.Now.AddMonths(1);
+                db.AmbToken.Add(m);
+                db.SaveChanges();
+
+
+
+                string json = JsonConvert.SerializeObject(token);
                 response.Data = json;
             }
             catch (Exception ex)
@@ -113,7 +132,7 @@ namespace AmbAPI.Controllers
                 }
             }
 
-            return response.ToString();
+            return new HttpResponseMessage { Content = new StringContent(response.ToString(), System.Text.Encoding.UTF8, "application/json") };
         }
 
 
@@ -123,12 +142,18 @@ namespace AmbAPI.Controllers
         /// <param name="code">用户代号</param>
         /// <returns>JSON格式用户信息</returns>
         [HttpGet]
-        public HttpResponseMessage GetOne(string code)
+        public HttpResponseMessage GetOne(string token)
         {
             MyResponse response = new MyResponse();
             try
             {
-                User u = db.User.FirstOrDefault<User>(X => X.UserCode == code);
+                AmbToken t = db.AmbToken.FirstOrDefault<AmbToken>(X => X.Token == token);
+                if (t == null) 
+                {
+                    throw new Exception(StatusCode.ObjectNotFound.ToString());
+                }
+
+                User u = db.User.FirstOrDefault<User>(X => X.UserCode == t.Code);
                 if (u == null)
                 {
                     throw new Exception(StatusCode.ObjectNotFound.ToString());

@@ -22,13 +22,11 @@ namespace AmbAPI.Models
 
         public DbSet<User> User { get; set; }
         public DbSet<News> News { get; set; }
-        public DbSet<ReportCell> ReportCell { get; set; }
-        public DbSet<ReportGroup> ReportGroup { get; set; }
         public DbSet<SBU> SBU { get; set; }
         public DbSet<About> About { get; set; }
         public DbSet<Notice> Notice { get; set; }
         public DbSet<Photo> Photo { get; set; }
-        public DbSet<AccountReport> AccountReport { get; set; }
+        public DbSet<AmbToken> AmbToken { get; set; }
         public DbSet<Test> Test { get; set; }
 
 

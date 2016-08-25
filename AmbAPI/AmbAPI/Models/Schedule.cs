@@ -15,6 +15,6 @@ namespace AmbAPI.Models
 
         public string Content { get; set; }
 
-
+        public DateTime? CreateTime { get; set; }
     }
 }

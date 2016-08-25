@@ -394,19 +394,14 @@ namespace AmbAPI.Models
                     UserName="系统管理员",
                     Password="1",
                     Mobile="15876500757",
-                    Sex=true,
-                    SbuCode="100",
-                    PhotoID=1
-
+                    Sex=true
                 },
                 new User{
                     UserCode="lz",
                     UserName="李煜辰",
                     Password="1",
                     Mobile="15876500757",
-                    Sex=false,
-                    SbuCode="200",
-                    PhotoID=2
+                    Sex=false
                 }
             };
             return list;

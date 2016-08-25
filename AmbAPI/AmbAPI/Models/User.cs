@@ -20,11 +20,13 @@ namespace AmbAPI.Models
 
         public string Mobile { get; set; }
 
-        public string SbuCode { get; set; }
-
         public bool Sex { get; set; }
 
-        public int PhotoID{get;set;}
+        public DateTime? BirthDay { get; set; }
+
+        public virtual SBU Sbu{ get; set; }
+
+        public virtual Photo Photo { get; set; }
 
     }
 }
