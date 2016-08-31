@@ -27,5 +27,9 @@ namespace AmbAPI.Models
 
         public int MemberCount { get; set; }
 
+        public virtual Photo Photo { get; set; }
+
+        //public virtual ICollection<User> Users { get; set; }
+
     }
 }

@@ -21,7 +21,6 @@ namespace AmbAPI.Controllers
     {
         private MyContext db = new MyContext();
 
-        // GET api/Photo
         [HttpGet]
         public HttpResponseMessage GetList()
         {
@@ -37,13 +36,11 @@ namespace AmbAPI.Controllers
             {
                 response.Code = StatusCode.Error;
             }
-            //return response.ToString();
             return new HttpResponseMessage { Content = new StringContent(response.ToString(), System.Text.Encoding.UTF8, "application/json") };
         }
 
-        // GET api/Photo/5
         [HttpGet]
-        public string GetOne(int id)
+        public HttpResponseMessage GetOne(int id)
         {
             MyResponse response = new MyResponse();
             try
@@ -67,7 +64,7 @@ namespace AmbAPI.Controllers
                     response.Code = StatusCode.Error;
                 }
             }
-            return response.ToString();
+            return new HttpResponseMessage { Content = new StringContent(response.ToString(), System.Text.Encoding.UTF8, "application/json") };
         }
 
         // PUT api/Photo/5
@@ -142,6 +139,36 @@ namespace AmbAPI.Controllers
             MyResponse response = new MyResponse();
 
             string filePath = "~\\UploadFiles\\Photo";
+
+            string sort = "",imgInfo="",userCode="";
+
+            //获取传输过来的参数
+            try
+            {
+                sort = HttpContext.Current.Request.Form["sort"].ToString();
+                imgInfo = HttpContext.Current.Request.Form["info"].ToString();
+                userCode = HttpContext.Current.Request.Form["user"].ToString();
+            }
+            catch
+            {
+                response.Code = StatusCode.ArgsNull;
+                return new HttpResponseMessage { Content = new StringContent(response.ToString(), System.Text.Encoding.UTF8, "application/json") };
+            }
+
+            if (sort.Equals("head"))
+            {
+                filePath += "\\Head";
+            }
+            else if (sort.Equals("live"))
+            {
+                filePath += "\\Live";
+            }
+            else
+            {
+                response.Code = StatusCode.ArgsNull;
+                return new HttpResponseMessage { Content = new StringContent(response.ToString(), System.Text.Encoding.UTF8, "application/json") };
+            }
+
             // 取得文件夹
             string dir = HttpContext.Current.Server.MapPath(filePath);
             //如果不存在文件夹，就创建文件夹
@@ -163,23 +190,37 @@ namespace AmbAPI.Controllers
                 {
                     //file.Headers.ContentDisposition.FileName;//上传文件前的文件名
                     //file.LocalFileName;//上传后的文件名
+
                     Photo p = new Photo();
-                    p.ImgInfo = file.LocalFileName.Substring(file.LocalFileName.LastIndexOf("\\"));
-                    p.Sort = "员工相册";
-                    p.AddUser = "admin";
+                    p.ImgInfo = imgInfo;
+                    p.Sort = sort;
+                    p.AddUser = userCode;
                     p.AddTime = DateTime.Now;
-                    p.Url = filePath + p.ImgInfo;
-                    p.BelongID = 0;
+                    p.Url = filePath + file.LocalFileName.Substring(file.LocalFileName.LastIndexOf("\\"));
 
                     db.Photo.Add(p);
                     db.SaveChanges();
+
+                    //更新头像地址到用户表
+                    if (sort.Equals("head") && !string.IsNullOrEmpty(userCode))
+                    {
+                        User u = db.User.FirstOrDefault<User>(X => X.UserCode == userCode);
+                        if (u != null)
+                        {
+                            Photo newP = db.Photo.OrderByDescending(A=>A.ID).FirstOrDefault(X => X.AddUser == u.UserCode);
+                            u.Photo = newP;
+                            db.Entry(u).State=EntityState.Modified;
+                            db.SaveChanges();
+                        }
+                    }
                 }
 
-                foreach (string key in provider.FormData.AllKeys)
-                {
-                   // dic.Add(key, provider.FormData[key]);
+                //循环获取参数
+                //foreach (string key in provider.FormData.AllKeys)
+                //{
+                //   // dic.Add(key, provider.FormData[key]);
 
-                }
+                //}
 
                 response.Code = StatusCode.Success;
             }
