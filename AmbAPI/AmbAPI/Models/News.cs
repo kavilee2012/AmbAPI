@@ -21,6 +21,9 @@ namespace AmbAPI.Models
 
         public bool IsTop { get; set; }
 
-        public virtual Photo Photo { get; set; }
+        public int OrderNo { get; set; }
+
+        public string ImgUrl { get; set; }
+
     }
 }
