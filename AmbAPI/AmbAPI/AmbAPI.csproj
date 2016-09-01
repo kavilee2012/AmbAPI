@@ -233,6 +233,27 @@
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="TestWeb\index.html" />
+    <Content Include="UploadFiles\Photo\News\12.jpg" />
+    <Content Include="UploadFiles\Photo\News\13.jpg" />
+    <Content Include="UploadFiles\Photo\News\14.jpg" />
+    <Content Include="UploadFiles\Photo\News\n21.jpg" />
+    <Content Include="UploadFiles\Photo\News\n20.jpg" />
+    <Content Include="UploadFiles\Photo\News\n19.gif" />
+    <Content Include="UploadFiles\Photo\News\n18.jpg" />
+    <Content Include="UploadFiles\Photo\News\n17.jpg" />
+    <Content Include="UploadFiles\Photo\News\n16.jpg" />
+    <Content Include="UploadFiles\Photo\News\n15.jpg" />
+    <Content Include="UploadFiles\Photo\News\n11.jpg" />
+    <Content Include="UploadFiles\Photo\News\n10.jpg" />
+    <Content Include="UploadFiles\Photo\News\n9.jpg" />
+    <Content Include="UploadFiles\Photo\News\n8.jpg" />
+    <Content Include="UploadFiles\Photo\News\n6.jpg" />
+    <Content Include="UploadFiles\Photo\News\n5.jpg" />
+    <Content Include="UploadFiles\Photo\News\n4.jpg" />
+    <Content Include="UploadFiles\Photo\News\n3.jpg" />
+    <Content Include="UploadFiles\Photo\News\n2.png" />
+    <Content Include="UploadFiles\Photo\News\n1.jpg" />
+    <Content Include="UploadFiles\Photo\News\n7.jpg" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -277,7 +298,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="UploadFiles\Photo\Head\" />
     <Folder Include="UploadFiles\Photo\Live\" />
-    <Folder Include="UploadFiles\Photo\News\" />
     <Folder Include="UploadFiles\Photo\SBU\" />
   </ItemGroup>
   <ItemGroup>

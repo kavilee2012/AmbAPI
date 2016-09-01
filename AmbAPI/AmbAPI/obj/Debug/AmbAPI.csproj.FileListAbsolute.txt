@@ -41,3 +41,4 @@ E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\zh-Hans\System.Web.WebPages.Deployment.re
 E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
 E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\obj\Debug\AmbAPI.dll
 E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\obj\Debug\AmbAPI.pdb
+E:\OpenSource\AmbAPI\AmbAPI\AmbAPI\obj\Debug\AmbAPI.csprojResolveAssemblyReference.cache
