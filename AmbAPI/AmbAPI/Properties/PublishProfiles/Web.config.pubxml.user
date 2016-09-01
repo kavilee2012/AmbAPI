@@ -11,7 +11,7 @@
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/AmbAPI.dll">
-      <publishTime>08/25/2016 18:24:01</publishTime>
+      <publishTime>09/01/2016 15:17:05</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>06/06/2016 23:00:36</publishTime>
@@ -367,6 +367,69 @@
     <File Include="TestWeb/index.html">
       <publishTime>08/25/2016 18:11:14</publishTime>
     </File>
+    <File Include="UploadFiles/Photo/News/12.jpg">
+      <publishTime>09/01/2016 09:28:16</publishTime>
+    </File>
+    <File Include="UploadFiles/Photo/News/13.jpg">
+      <publishTime>09/01/2016 09:28:16</publishTime>
+    </File>
+    <File Include="UploadFiles/Photo/News/14.jpg">
+      <publishTime>09/01/2016 09:28:16</publishTime>
+    </File>
+    <File Include="UploadFiles/Photo/News/n1.jpg">
+      <publishTime>09/01/2016 09:28:16</publishTime>
+    </File>
+    <File Include="UploadFiles/Photo/News/n10.jpg">
+      <publishTime>09/01/2016 09:28:16</publishTime>
+    </File>
+    <File Include="UploadFiles/Photo/News/n11.jpg">
+      <publishTime>09/01/2016 09:28:16</publishTime>
+    </File>
+    <File Include="UploadFiles/Photo/News/n15.jpg">
+      <publishTime>09/01/2016 09:28:16</publishTime>
+    </File>
+    <File Include="UploadFiles/Photo/News/n16.jpg">
+      <publishTime>09/01/2016 09:28:16</publishTime>
+    </File>
+    <File Include="UploadFiles/Photo/News/n17.jpg">
+      <publishTime>09/01/2016 09:28:16</publishTime>
+    </File>
+    <File Include="UploadFiles/Photo/News/n18.jpg">
+      <publishTime>09/01/2016 09:28:16</publishTime>
+    </File>
+    <File Include="UploadFiles/Photo/News/n19.gif">
+      <publishTime>09/01/2016 09:28:16</publishTime>
+    </File>
+    <File Include="UploadFiles/Photo/News/n2.png">
+      <publishTime>09/01/2016 09:28:16</publishTime>
+    </File>
+    <File Include="UploadFiles/Photo/News/n20.jpg">
+      <publishTime>09/01/2016 09:28:16</publishTime>
+    </File>
+    <File Include="UploadFiles/Photo/News/n21.jpg">
+      <publishTime>09/01/2016 09:28:16</publishTime>
+    </File>
+    <File Include="UploadFiles/Photo/News/n3.jpg">
+      <publishTime>09/01/2016 09:28:16</publishTime>
+    </File>
+    <File Include="UploadFiles/Photo/News/n4.jpg">
+      <publishTime>09/01/2016 09:28:16</publishTime>
+    </File>
+    <File Include="UploadFiles/Photo/News/n5.jpg">
+      <publishTime>09/01/2016 09:28:16</publishTime>
+    </File>
+    <File Include="UploadFiles/Photo/News/n6.jpg">
+      <publishTime>09/01/2016 09:28:16</publishTime>
+    </File>
+    <File Include="UploadFiles/Photo/News/n7.jpg">
+      <publishTime>09/01/2016 09:28:16</publishTime>
+    </File>
+    <File Include="UploadFiles/Photo/News/n8.jpg">
+      <publishTime>09/01/2016 09:28:16</publishTime>
+    </File>
+    <File Include="UploadFiles/Photo/News/n9.jpg">
+      <publishTime>09/01/2016 09:28:16</publishTime>
+    </File>
     <File Include="Views/Home/Index.cshtml">
       <publishTime>06/06/2016 22:59:59</publishTime>
     </File>
@@ -413,7 +476,7 @@
       <publishTime>06/06/2016 22:59:59</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/25/2016 18:24:04</publishTime>
+      <publishTime>09/01/2016 15:17:08</publishTime>
     </File>
   </ItemGroup>
 </Project>

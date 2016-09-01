@@ -132,6 +132,7 @@
     <Compile Include="Controllers\NoticeController.cs" />
     <Compile Include="Controllers\PhotoController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\ReportDataController.cs" />
     <Compile Include="Controllers\SbuController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Controllers\TestController.cs" />
@@ -150,6 +151,7 @@
     <Compile Include="Models\Notice.cs" />
     <Compile Include="Models\Photo.cs" />
     <Compile Include="Models\Report.cs" />
+    <Compile Include="Models\ReportData.cs" />
     <Compile Include="Models\SBU.cs" />
     <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\Test.cs" />

@@ -64,5 +64,13 @@ namespace AmbAPI.Models
             get { return remark; }
             set { remark = value; }
         }
+
+        float money;
+
+        public float Money
+        {
+            get { return money; }
+            set { money = value; }
+        }
     }
 }

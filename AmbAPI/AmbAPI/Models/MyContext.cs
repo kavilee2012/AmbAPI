@@ -45,5 +45,7 @@ namespace AmbAPI.Models
         public DbSet<Schedule> Schedules { get; set; }
 
         public DbSet<Report> Reports { get; set; }
+
+        public DbSet<ReportData> ReportDatas { get; set; }
     }
 }

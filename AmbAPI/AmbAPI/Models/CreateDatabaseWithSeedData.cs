@@ -20,6 +20,7 @@ namespace AmbAPI.Models
             GetReports().ForEach(X => context.Reports.Add(X));
             GetSbus().ForEach(X => context.SBU.Add(X));
             GetUsers().ForEach(X => context.User.Add(X));
+            GetReportData().ForEach(X => context.ReportDatas.Add(X));
         }
 
         #region 新增新闻
@@ -111,7 +112,7 @@ namespace AmbAPI.Models
                 {
                     Title="欧度控股阿米巴经营项目辅导纪实",
                     Content="欧度控股【理念+算盘】阿米巴经营模式咨询项目辅导进入第3次，已经取得显著效果。",
-                    AddTime=DateTime.Parse("2016-2-30"),
+                    AddTime=DateTime.Parse("2016-2-3"),
                     ImgUrl=@"UploadFiles/Photo/News/n10.jpg",
                     Url="http://www.simchn.com/index.php?g=home&m=video&a=show&id=116",
                     OrderNo=0
@@ -129,7 +130,7 @@ namespace AmbAPI.Models
                 {
                     Title="打造百年经典企业 赢在阿米巴经营策略",
                     Content="016年8月30日-9月1日，阿米巴经营中国落地开创者、道成咨询集团创始人田和喜老师为超级集团中高层管理人员讲授【理念+算盘】阿米巴经营。",
-                    AddTime=DateTime.Parse("2016-8-31"),
+                    AddTime=DateTime.Parse("2016-8-30"),
                     ImgUrl=@"UploadFiles/Photo/News/n12.jpg",
                     Url="http://www.simchn.com/index.php?g=home&m=article&a=show&id=1132",
                     OrderNo=0
@@ -165,7 +166,7 @@ namespace AmbAPI.Models
                 {
                     Title="道成咨询云集中国500强企业 铸商界巨子",
                     Content="当前，中国500强企业也逐渐关注到阿米巴经营经营模式，并携手阿米巴经营本土化领导者广州道成智聚，学习隐秘于其背后的【理念+算盘】经营真谛，为企业发展注入新活力。",
-                    AddTime=DateTime.Parse("2016-2-30"),
+                    AddTime=DateTime.Parse("2016-2-18"),
                     ImgUrl=@"UploadFiles/Photo/News/n16.jpg",
                     Url="http://www.simchn.com/index.php?g=home&m=article&a=show&id=1001",
                     OrderNo=1
@@ -238,7 +239,7 @@ namespace AmbAPI.Models
                     FatherCode="0",
                     Level=0,
                     Order=200,
-                    Name="变动费",
+                    Name="变动费用",
                     Remark=""
                 },
                 new Report{
@@ -375,6 +376,293 @@ namespace AmbAPI.Models
             return reports;
         }
         #endregion
+
+
+        #region
+        private static List<ReportData> GetReportData() 
+        {
+            var list = new List<ReportData>{
+                new ReportData{
+                    Code="100",Name="销售额",
+                    YM="201609",
+                    Money=3704489
+                },
+                new ReportData{
+                    Code="101",Name="主营业务收入",
+                    YM="201609",
+                    Money=3704489
+                },
+                new ReportData{
+                    Code="102",Name="其它业务收入",
+                    YM="201609",
+                    Money=0
+                },
+                new ReportData{
+                    Code="103",Name="非业务收入",
+                    YM="201609",
+                    Money=0
+                },
+                new ReportData{
+                    Code="200",Name="变动费用",
+                    YM="201609",
+                    Money=2245830
+                },
+                new ReportData{
+                    Code="201",Name="生产成本",
+                    YM="201609",
+                    Money=604276
+                },
+                new ReportData{
+                    Code="202",Name="销售成本",
+                    YM="201609",
+                    Money=718603
+                },
+                new ReportData{
+                    Code="203",Name="研发成本",
+                    YM="201609",
+                    Money=605812
+                },
+                new ReportData{
+                    Code="204",Name="其它变动费",
+                    YM="201609",
+                    Money=0
+                },
+                new ReportData{
+                    Code="300",Name="边界利益",
+                    YM="201609",
+                    Money=1458660
+                },
+                new ReportData{
+                    Code="400",Name="边界利益率",
+                    YM="201609",
+                    Money=39.38F
+                },
+                new ReportData{
+                    Code="500",Name="固定费用",
+                    YM="201609",
+                    Money=1664332
+                },
+                new ReportData{
+                    Code="501",Name="员工工资",
+                    YM="201609",
+                    Money=1526627
+                },
+                new ReportData{
+                    Code="502",Name="办公费用",
+                    YM="201609",
+                    Money=135230
+                },
+                new ReportData{
+                    Code="503",Name="场地费用",
+                    YM="201609",
+                    Money=1655
+                },
+                new ReportData{
+                    Code="504",Name="其它固定费用",
+                    YM="201609",
+                    Money=820
+                },
+                new ReportData{
+                    Code="600",Name="经营利益",
+                    YM="201609",
+                    Money=-205672
+                },
+                new ReportData{
+                    Code="700",Name="经营利益率",
+                    YM="201609",
+                    Money=-5.55F
+                },
+
+
+                new ReportData{
+                    Code="100",Name="销售额",
+                    YM="201608",
+                    Money=2094652
+                },
+                new ReportData{
+                    Code="101",Name="主营业务收入",
+                    YM="201608",
+                    Money=2094652
+                },
+                new ReportData{
+                    Code="102",Name="其它业务收入",
+                    YM="201608",
+                    Money=0
+                },
+                new ReportData{
+                    Code="103",Name="非业务收入",
+                    YM="201608",
+                    Money=0
+                },
+                new ReportData{
+                    Code="200",Name="变动费用",
+                    YM="201608",
+                    Money=2085372
+                },
+                new ReportData{
+                    Code="201",Name="生产成本",
+                    YM="201608",
+                    Money=1205363
+                },
+                new ReportData{
+                    Code="202",Name="销售成本",
+                    YM="201608",
+                    Money=669938
+                },
+                new ReportData{
+                    Code="203",Name="研发成本",
+                    YM="201608",
+                    Money=210071
+                },
+                new ReportData{
+                    Code="204",Name="其它变动费",
+                    YM="201608",
+                    Money=0
+                },
+                new ReportData{
+                    Code="300",Name="边界利益",
+                    YM="201608",
+                    Money=9280
+                },
+                new ReportData{
+                    Code="400",Name="边界利益率",
+                    YM="201608",
+                    Money=0.44F
+                },
+                new ReportData{
+                    Code="500",Name="固定费用",
+                    YM="201608",
+                    Money=1328810
+                },
+                new ReportData{
+                    Code="501",Name="员工工资",
+                    YM="201608",
+                    Money=947445
+                },
+                new ReportData{
+                    Code="502",Name="办公费用",
+                    YM="201608",
+                    Money=210190
+                },
+                new ReportData{
+                    Code="503",Name="场地费用",
+                    YM="201608",
+                    Money=170622
+                },
+                new ReportData{
+                    Code="504",Name="其它固定费用",
+                    YM="201608",
+                    Money=554
+                },
+                new ReportData{
+                    Code="600",Name="经营利益",
+                    YM="201608",
+                    Money=-1319530
+                },
+                new ReportData{
+                    Code="700",Name="经营利益率",
+                    YM="201608",
+                    Money=-63.00F
+                },
+
+
+                new ReportData{
+                    Code="100",Name="销售额",
+                    YM="201607",
+                    Money=4775973
+                },
+                new ReportData{
+                    Code="101",Name="主营业务收入",
+                    YM="201607",
+                    Money=4775973
+                },
+                new ReportData{
+                    Code="102",Name="其它业务收入",
+                    YM="201607",
+                    Money=0
+                },
+                new ReportData{
+                    Code="103",Name="非业务收入",
+                    YM="201607",
+                    Money=0
+                },
+                new ReportData{
+                    Code="200",Name="变动费用",
+                    YM="201607",
+                    Money=2127888
+                },
+                new ReportData{
+                    Code="201",Name="生产成本",
+                    YM="201607",
+                    Money=1205363
+                },
+                new ReportData{
+                    Code="202",Name="销售成本",
+                    YM="201607",
+                    Money=712454
+                },
+                new ReportData{
+                    Code="203",Name="研发成本",
+                    YM="201607",
+                    Money=210071
+                },
+                new ReportData{
+                    Code="204",Name="其它变动费",
+                    YM="201607",
+                    Money=0
+                },
+                new ReportData{
+                    Code="300",Name="边界利益",
+                    YM="201607",
+                    Money=2648085
+                },
+                new ReportData{
+                    Code="400",Name="边界利益率",
+                    YM="201607",
+                    Money=55.45F
+                },
+                new ReportData{
+                    Code="500",Name="固定费用",
+                    YM="201607",
+                    Money=2384256
+	
+                },
+                new ReportData{
+                    Code="501",Name="员工工资",
+                    YM="201607",
+                    Money=1970989
+                },
+                new ReportData{
+                    Code="502",Name="办公费用",
+                    YM="201607",
+                    Money=201959
+                },
+                new ReportData{
+                    Code="503",Name="场地费用",
+                    YM="201607",
+                    Money=210190
+                },
+                new ReportData{
+                    Code="504",Name="其它固定费用",
+                    YM="201607",
+                    Money=1119
+                },
+                new ReportData{
+                    Code="600",Name="经营利益",
+                    YM="201607",
+                    Money=-263829
+                },
+                new ReportData{
+                    Code="700",Name="经营利益率",
+                    YM="201607",
+                    Money=5.52F
+                }
+            };
+            return list;
+        }
+        #endregion
+
+
 
         #region SBU
         private static List<SBU> GetSbus()

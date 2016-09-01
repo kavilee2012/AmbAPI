@@ -22,15 +22,35 @@ namespace AmbAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public HttpResponseMessage GetList()
+        public HttpResponseMessage GetList(string ym)
         {
             MyResponse response = new MyResponse();
             try
             {
-                List<Report> list = db.Reports.ToList();
-                string json = JsonConvert.SerializeObject(list);
-                response.Count = list.Count.ToString();
-                response.Data = json;
+                List<ReportData> rdList = db.ReportDatas.Where(X => X.YM == ym).ToList();
+                if (rdList.Count > 0)
+                {
+                    List<Report> list = db.Reports.ToList();
+
+                    foreach(Report r in list)
+                    {
+                        ReportData rd = rdList.FirstOrDefault<ReportData>(X => X.Code == r.Code);
+                        if (rd != null)
+                            r.Money = rd.Money;
+                    }
+
+                    string json = JsonConvert.SerializeObject(list);
+                    response.Count = list.Count.ToString();
+                    response.Data = json;
+                }
+                else
+                {
+                    List<Report> list = new List<Report>();
+                    string json = JsonConvert.SerializeObject(list);
+                    response.Count = list.Count.ToString();
+                    response.Data = json;
+                }
+                
             }
             catch (Exception ex)
             {
